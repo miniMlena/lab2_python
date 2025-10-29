@@ -1,20 +1,34 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
+from pathlib import Path
+from src.execute import execute
+import logging
 
+logging.basicConfig(level=logging.INFO, filename="shell.log",
+                    filemode="w", format="%(asctime)s %(message)s",
+                    datefmt='[%Y-%m-%d %H:%M:%S]', encoding='utf-8')
 
 def main() -> None:
     """
     Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
     :return: Данная функция ничего не возвращает
     """
+    #print('Добро пожаловать в мини-оболочку! Доступные команды для выполнения: .' \
+    #'Для выхода введите "выход" или "exit".')
+    #print('Welcome to mini-shell! Available commands: . To exit type "выход" or "exit".')
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
+    while True:
+        request = input(f'{Path.cwd()}$ ')
 
-    result = power_function(target=target, power=degree)
+        logging.info(request)
 
-    print(result)
+        if request.strip().lower() in ("выход", "exit"):
+            print("Exiting programm...")
+            break
 
-    print(SAMPLE_CONSTANT)
+        try:
+            execute(request)
+        except Exception as e:
+            print(e)
+            logging.error(f"ERROR: {e}")
 
 if __name__ == "__main__":
     main()
