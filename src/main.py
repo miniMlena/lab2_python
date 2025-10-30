@@ -26,9 +26,12 @@ def main() -> None:
 
         try:
             execute(request)
+            logging.info("command completed successfully")
         except Exception as e:
             print(e)
             logging.error(f"ERROR: {e}")
 
 if __name__ == "__main__":
     main()
+
+#    py -m src.main         cd ../Documents/exps

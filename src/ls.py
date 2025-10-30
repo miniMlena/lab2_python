@@ -5,7 +5,7 @@ from datetime import datetime
 from src.errors import ShellError
 from src.pathes import normalize_path, find_pathes
 
-def ls(request: str) -> None:
+def ls(text: str) -> None:
     """
     Реализация команды ls с поддержкой пути и опции -l
     Использование: ls [path] или ls -l [path]
@@ -27,13 +27,13 @@ def ls(request: str) -> None:
     flag = None
     path = None
     
-    if request:
-        if request.startswith("-"):
-            flag = request.split()[0][1::]
-            request = re.sub(r"-.*", '', request, count=1)
+    if text:
+        if text.startswith("-"):
+            flag = text.split()[0][1::]
+            text = re.sub(r"-[^\s]*", '', text, count=1)
 
-    if request:
-        pathes = find_pathes(request)
+    if text:
+        pathes = find_pathes(text)
         if len(pathes) > 1:
             raise ShellError(f"ls: too many arguments")
         else: path = pathes[0]
