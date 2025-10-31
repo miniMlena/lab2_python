@@ -2,11 +2,20 @@ from pathlib import Path
 from src.constants import PATH_RE
 
 def find_pathes(text: str) -> list:
+    '''
+    Нахождение путей по шаблону в строке, введённой пользоватлем
+    :param text: Строка, содержащая пути
+    :return: Возвращает список найденных путей
+    '''
     text = text.strip()
     return PATH_RE.findall(text)
 
 def normalize_path(path: str) -> Path:
-    ''''''
+    '''
+    Приводит указанный путь к нормализованному виду
+    :param path: Путь в формате строки
+    :return: Возвращает нормализованный путь
+    '''
     path = path.replace('"', '')
 
     if path == "~":

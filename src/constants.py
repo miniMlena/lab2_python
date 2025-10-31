@@ -1,7 +1,5 @@
 import re
 
-SAMPLE_CONSTANT: int = 10
-
 PATH_RE: re.Pattern = re.compile(
     r"""
     (?:[^\s"]*\\?["][^\\"]*\s+[^\\"]*["]\\?[^\s"]*)+

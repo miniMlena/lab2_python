@@ -1,15 +1,17 @@
 import re
-from pathlib import Path
 import shutil
 from src.errors import ShellError
-from src.pathes import normalize_path, find_pathes
+from src.paths import normalize_path, find_pathes
 
 def cp(text: str) -> None:
-    ''''''
+    '''
+    Копирование указанного файла по указанному пути.
+    С опцией -r возможно рекурсивное копирование директорий
+    :param text: Строка, содержащая опции, путь источника и путь назначения
+    :return: Данная функция ничего не возвращает
+    '''
     flag = None
-    copying_path = None
-    destination_path = None
-
+    # Находим опции
     if text.startswith("-"):
         flag = text.split()[0][1::]
         text = re.sub(r"-[^\s]*", '', text, count=1)
@@ -19,17 +21,19 @@ def cp(text: str) -> None:
     
     if not text:
         raise ShellError("cp: missing file operand")
-    else:
-        pathes = find_pathes(text)
+    
+    # Находим пути
+    pathes = find_pathes(text)
 
-        if len(pathes) == 1:
-            raise ShellError(f"cp: missing destination file operand after '{pathes[0]}'")
-        elif len(pathes) > 2:
-            raise ShellError(f"cp: too many arguments")
+    if len(pathes) == 1:
+        raise ShellError(f"cp: missing destination file operand after '{pathes[0]}'")
+    elif len(pathes) > 2:
+        raise ShellError(f"cp: too many arguments")
         
-        copying_path = normalize_path(pathes[0])
-        destination_path = normalize_path(pathes[1])
+    copying_path = normalize_path(pathes[0])
+    destination_path = normalize_path(pathes[1])
             
+    # Проверка ошибок
     if not copying_path.exists():
         raise ShellError(f"cp: cannot stat '{copying_path}': No such file or directory")
     
@@ -50,38 +54,20 @@ def cp(text: str) -> None:
     if copying_path.is_dir() and destination_path.is_relative_to(copying_path):
         raise ShellError(f"cp: cannot copy '{copying_path}' to a subdirectory of itself, '{destination_path}'")
 
-    # Если источник - директория
-    # в линукс если дест не существует, то копирует именно содержимое директории,
-    # без самой директории. Как бы копирует по существующему адресу и переименовывает
-    # копи_паз в то, что написано в дист_паз
     if copying_path.is_dir():
-        
         try:
             shutil.copytree(copying_path, destination_path, dirs_exist_ok=True)
         except PermissionError:
-            raise ShellError(f"cp: permission denied: '{copying_path}'")
+            raise ShellError(f"cp: permission denied: '{pathes[0]}'")
         except Exception as e:
-            raise ShellError(f"cp: cannot copy directory '{copying_path}': {e}")
-        # Нужно чтобы если дест дир существует, он НЕ затирал её, а просто копировал копи дир в неё
-        # а если дест дир не существует, то создать такую же копию копи дир, но переименованную
-    
+            raise ShellError(f"cp: cannot copy directory '{pathes[0]}': {e}")
     # Если источник - файл
     else:
-        # Если цель - существующая директория, копируем файл в нее
         if destination_path.exists() and destination_path.is_dir():
-            final_dest = destination_path / copying_path.name
-        else:
-            final_dest = destination_path
-        
+            destination_path = destination_path / copying_path.name
         try:
-            '''
-            # Создаем родительские директории, если нужно
-            # линукс этого не делает
-            if not final_dest.parent.exists():
-                final_dest.parent.mkdir(parents=True)
-            '''
-            shutil.copy2(copying_path, final_dest)
+            shutil.copy2(copying_path, destination_path)
         except PermissionError:
-            print(f"cp: permission denied: '{copying_path}'")
+            raise ShellError(f"cp: permission denied: '{pathes[0]}'")
         except Exception as e:
-            print(f"cp: cannot copy '{copying_path}': {e}")
+            raise ShellError(f"cp: cannot copy '{pathes[0]}': {e}")

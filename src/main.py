@@ -8,12 +8,12 @@ logging.basicConfig(level=logging.INFO, filename="shell.log",
 
 def main() -> None:
     """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+    Точка входа в программу
     :return: Данная функция ничего не возвращает
     """
-    #print('Добро пожаловать в мини-оболочку! Доступные команды для выполнения: .' \
-    #'Для выхода введите "выход" или "exit".')
-    #print('Welcome to mini-shell! Available commands: . To exit type "выход" or "exit".')
+    print('Добро пожаловать в мини-оболочку! Доступные команды для выполнения: .' \
+    'Для выхода введите "выход" или "exit".')
+    print('Welcome to mini-shell! Available commands: . To exit type "выход" or "exit".')
 
     while True:
         request = input(f'{Path.cwd()}$ ')
@@ -21,12 +21,18 @@ def main() -> None:
         logging.info(request)
 
         if request.strip().lower() in ("выход", "exit"):
-            print("Exiting programm...")
+            print("Exiting shell...")
             break
+        
+        if request.strip() == "":
+            continue
 
         try:
             execute(request)
             logging.info("command completed successfully")
+        except KeyboardInterrupt:
+            print("Exiting shell...")
+            break
         except Exception as e:
             print(e)
             logging.error(f"ERROR: {e}")

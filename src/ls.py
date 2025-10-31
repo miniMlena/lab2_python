@@ -3,59 +3,41 @@ import stat
 from pathlib import Path
 from datetime import datetime
 from src.errors import ShellError
-from src.pathes import normalize_path, find_pathes
+from src.paths import normalize_path, find_pathes
 
 def ls(text: str) -> None:
     """
-    Реализация команды ls с поддержкой пути и опции -l
-    Использование: ls [path] или ls -l [path]
+    Вывод списка файлов и каталогов, находящихся в указанной директории.
+    С опцией -l также выводятся права доступа, размер и время изменения файлов
+    :param text: Строка с опциями и путём к файлу или директории (возможно пустая)
+    :return: Данная функция ничего не возвращает
     """
-    # Парсинг аргументов
-    '''
-    path = None
-    more_data = False
-    
-    if args:
-        # Обрабатываем аргументы
-        for arg in args:
-            if arg.startswith('-'):
-                if 'l' in arg:
-                    more_data = True
-            else:
-                path = arg
-    '''
     flag = None
     path = None
-    
+
+    # Находим опции
     if text:
         if text.startswith("-"):
             flag = text.split()[0][1::]
             text = re.sub(r"-[^\s]*", '', text, count=1)
 
+    if not(flag == "l" or flag == None):
+        raise ShellError(f"ls: invalid option -- '{flag.replace("l", "", 1)}'")
+    
+    # Находим пути
     if text:
         pathes = find_pathes(text)
         if len(pathes) > 1:
             raise ShellError(f"ls: too many arguments")
         else: path = pathes[0]
-    
-    if not(flag == "l" or flag == None):
-        raise ShellError(f"ls: invalid option -- '{flag.replace("l", "", 1)}'")
 
-    # Если путь не указан, используем текущую директорию
     if path == None:
         target_path = Path.cwd()
     else:
         target_path = normalize_path(path)
     
-    # Проверяем существование пути
     if not target_path.exists():
-        '''
-        print(f"ls: cannot access '{path}': No such file or directory")
-        return   # можно через raise ShellError
-        '''
-        # если введёно что-то из cwd, но не указано как относительная ссылка, то мб надо обработать
         raise ShellError(f"ls: cannot access '{path}': No such file or directory")
-    # Может лучше создать отдельную функцию для таких ошибок и менять ls
 
     if target_path.is_file():
         files = [target_path] # если путь ведёт к файлу
@@ -66,20 +48,20 @@ def ls(text: str) -> None:
     if flag == "l":
         list_long_format(files)
     else:
-        list_simple(files)
+        for file in files:
+            if "'" in file.name:
+                print('"' + file.name + '"')
+            elif " " in file.name:
+                print("'" + file.name + "'")
+            else:
+                print(file.name)
 
-def list_simple(files):
-    """Простой вывод (только имена)"""
-    for file in files:
-        if "'" in file.name:
-            print('"' + file.name + '"')
-        elif " " in file.name:
-            print("'" + file.name + "'")
-        else:
-            print(file.name)
-
-def list_long_format(files):
-    """Подробный вывод с информацией о файлах"""
+def list_long_format(files: list) -> None:
+    """
+    Вспомогательная функция для вывода подробной информации о файлах
+    :param files: Список путей к файлам
+    :return: Данная функция ничего не возвращает
+    """
     file_stats = []
     
     for file in files:
@@ -105,23 +87,17 @@ def list_long_format(files):
         
         print(f"{permissions} {size:>6} {mtime_str} {name}")
 
-def get_permissions(data):
-    """Преобразует числовой режим доступа в строку вида -rwxr-xr-x"""
+def get_permissions(data: int) -> str:
+    """
+    Вспомогательная функция для преобразования информации
+    о режиме доступа к файлу в формат, принятый в linux
+    :param data: Число, содержащее информацию о типе файла и правах доступа
+    :return: Строка вида -rwxr-xr-x
+    """
     permissions = []
     
-    # Тип файла
     if stat.S_ISDIR(data):
         permissions.append('d')
-    elif stat.S_ISLNK(data):
-        permissions.append('l')
-    elif stat.S_ISFIFO(data):
-        permissions.append('p')
-    elif stat.S_ISSOCK(data):
-        permissions.append('s')
-    elif stat.S_ISCHR(data):
-        permissions.append('c')
-    elif stat.S_ISBLK(data):
-        permissions.append('b')
     else:
         permissions.append('-')
     

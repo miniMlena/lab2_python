@@ -4,9 +4,11 @@ from src.cd import cd
 from src.cat import cat
 from src.cp import cp
 from src.mv import mv
+from src.rm import rm
 from src.errors import ShellError
 
 def execute(text: str) -> None:
+    
     text = text.strip()
     if text:
         if text.startswith("ls"):
@@ -19,6 +21,7 @@ def execute(text: str) -> None:
             cp(text[2::].strip())
         elif text.startswith("mv"):
             mv(text[2::].strip())
-
+        elif text.startswith("rm"):
+            rm(text[2::].strip())
         else:
             raise ShellError(f"{text.split(maxsplit = 1)[0]}: command not found")
