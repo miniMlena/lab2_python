@@ -5,7 +5,9 @@ from src.paths import normalize_path, find_pathes
 
 def grep(text: str) -> None:
     """
-    
+    Поиск строк, соответствующих шаблону в файлах.
+    :param text: Строка, содержащая опции, паттерн и пути
+    :return: Данная функция ничего не возвращает
     """
     recursive = False
     ignore_case = False
@@ -58,8 +60,16 @@ def grep(text: str) -> None:
 
         grep_search(path, pattern, regex, recursive, ignore_case)
 
-def grep_search(path: Path, pattern: str, regex: re.Pattern, recursive: bool, ignore_case: bool):
-    """Рекурсивный поиск по шаблону"""
+def grep_search(path: Path, pattern: str, regex: re.Pattern, recursive: bool, ignore_case: bool) -> None:
+    """
+    Поиск строк, соответствующих шаблону в файлах
+    :param path: Путь, по которому осуществляется поиск
+    :param pattern: Строка-паттерн, по которому осуществляется поиск
+    :param regex: Паттерн, по которому осуществляется поиск
+    :param recursive: Является ли поиск рекурсивным
+    :param ignore_case: Нужно ли игнорировать регистр
+    :return: Данная функция ничего не возвращает
+    """
     
     if not path.exists():
         raise ShellError(f"grep: {path}: No such file or directory")
@@ -78,7 +88,12 @@ def grep_search(path: Path, pattern: str, regex: re.Pattern, recursive: bool, ig
             raise ShellError(f"grep: {path}: Is a directory")
 
 def search_in_file(file_path: Path, regex: re.Pattern):
-    """Поиск шаблона в одном файле"""
+    """
+    Поиск шаблона в одном файле
+    :param file_path: Путь, по которому осуществляется поиск
+    :param regex: Паттерн, по которому осуществляется поиск
+    :return: Данная функция ничего не возвращает
+    """
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             for line_num, line in enumerate(file, 1):
