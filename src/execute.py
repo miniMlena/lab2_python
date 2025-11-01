@@ -1,4 +1,3 @@
-from src.constants import COMMAND_RE
 from src.ls import ls
 from src.cd import cd
 from src.cat import cat
@@ -7,6 +6,7 @@ from src.mv import mv
 from src.rm import rm
 from src.grep import grep
 from src.help import help
+from src.history import history
 from src.errors import ShellError
 
 def execute(text: str) -> None:
@@ -27,6 +27,8 @@ def execute(text: str) -> None:
             rm(text[2::].strip())
         elif text.startswith("grep"):
             grep(text[4::].strip())
+        elif text.startswith("history"):
+            history(text[7::].strip())
         elif text.startswith("--help") or text.startswith("help"):
             help()
         else:
