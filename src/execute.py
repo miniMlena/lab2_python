@@ -5,6 +5,7 @@ from src.cat import cat
 from src.cp import cp
 from src.mv import mv
 from src.rm import rm
+from src.help import help
 from src.errors import ShellError
 
 def execute(text: str) -> None:
@@ -23,5 +24,7 @@ def execute(text: str) -> None:
             mv(text[2::].strip())
         elif text.startswith("rm"):
             rm(text[2::].strip())
+        elif text.startswith("--help") or text.startswith("help"):
+            help()
         else:
             raise ShellError(f"{text.split(maxsplit = 1)[0]}: command not found")

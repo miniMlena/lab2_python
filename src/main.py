@@ -11,9 +11,10 @@ def main() -> None:
     Точка входа в программу
     :return: Данная функция ничего не возвращает
     """
-    print('Добро пожаловать в мини-оболочку! Доступные команды для выполнения: .' \
+    print('Добро пожаловать в мини-оболочку!\nВведите --help для информации о доступных командах. ' \
     'Для выхода введите "выход" или "exit".')
-    print('Welcome to mini-shell! Available commands: . To exit type "выход" or "exit".')
+    print('Welcome to mini-shell!\nType --help for information about available commands. ' \
+    'To exit type "выход" or "exit".')
 
     while True:
         request = input(f'{Path.cwd()}$ ')
