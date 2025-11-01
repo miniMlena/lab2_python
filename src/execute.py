@@ -1,4 +1,3 @@
-from src.constants import COMMAND_RE
 from src.ls import ls
 from src.cd import cd
 from src.cat import cat
