@@ -12,7 +12,7 @@ def main() -> None:
     :return: Данная функция ничего не возвращает
     """
     print('Добро пожаловать в мини-оболочку!\nВведите --help для информации о доступных командах. ' \
-    'Для выхода введите "выход" или "exit".')
+    'Для выхода введите "выход" или "exit".\n')
     print('Welcome to mini-shell!\nType --help for information about available commands. ' \
     'To exit type "выход" or "exit".')
 

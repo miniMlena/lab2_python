@@ -17,7 +17,7 @@ def test_mv_too_little_arguments():
 
 def test_mv_too_many_arguments():
     with pytest.raises(ShellError):
-        mv('-r path/to/"file 1" path/to/file2 path/to/dir')
+        mv('path/to/"file 1" path/to/file2 path/to/dir')
         mv('"path/to/my file" dir1 dir2')
 
 
