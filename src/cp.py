@@ -2,6 +2,7 @@ import re
 import shutil
 from src.errors import ShellError
 from src.paths import normalize_path, find_pathes
+from src.undo_logging import log_copy
 
 def cp(text: str) -> None:
     '''
@@ -43,6 +44,10 @@ def cp(text: str) -> None:
     if not destination_path.parent.exists():
         raise ShellError(f"cp: cannot create {['regular file', 'directory'][copying_path.is_dir()]} '{destination_path}': No such file or directory")
     
+    
+    if copying_path == destination_path / copying_path.name:
+        raise ShellError(f"cp: '{pathes[0]}' and '{copying_path}' are the same file")
+
     if copying_path.is_dir():
         if destination_path.exists() and not destination_path.is_dir():
             raise ShellError(f"cp: cannot overwrite non-directory '{pathes[1]}' with directory '{pathes[0]}'") 
@@ -57,6 +62,7 @@ def cp(text: str) -> None:
     if copying_path.is_dir():
         try:
             shutil.copytree(copying_path, destination_path, dirs_exist_ok=True)
+            log_copy(destination_path)
         except PermissionError:
             raise ShellError(f"cp: permission denied: '{pathes[0]}'")
         except Exception as e:
@@ -67,6 +73,7 @@ def cp(text: str) -> None:
             destination_path = destination_path / copying_path.name
         try:
             shutil.copy2(copying_path, destination_path)
+            log_copy(destination_path)
         except PermissionError:
             raise ShellError(f"cp: permission denied: '{pathes[0]}'")
         except Exception as e:

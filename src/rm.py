@@ -4,6 +4,7 @@ import shutil
 from pathlib import Path
 from src.errors import ShellError
 from src.paths import normalize_path, find_pathes
+from src.undo_logging import log_remove, remove_error_from_trash
 
 def rm(text: str) -> None:
     '''
@@ -51,6 +52,7 @@ def rm(text: str) -> None:
         response = input(f"rm: remove directory '{pathes[0]}' and all its contents? [y/n] ")
         if response.lower() in ['y', 'yes']:
             try:
+                log_remove(removing_path)
                 shutil.rmtree(removing_path)
             except PermissionError:
                 raise ShellError(f"rm: cannot remove '{pathes[0]}': Permission denied")
@@ -58,8 +60,13 @@ def rm(text: str) -> None:
                 raise ShellError(f"rm: cannot remove '{pathes[0]}': {e}")
     else:
         try:
+            # Сначала логируем, иначе потом необохдимая информация уже будет удалена
+            log_remove(removing_path)
             os.remove(removing_path)
         except PermissionError:
+            # Стираем из .trash лог об ошибочной операции
+            remove_error_from_trash()
             raise ShellError(f"rm: cannot remove '{pathes[0]}': Permission denied")
         except Exception as e:
+            remove_error_from_trash()
             raise ShellError(f"rm: cannot remove '{pathes[0]}': {e}")

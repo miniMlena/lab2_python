@@ -2,6 +2,7 @@ import shutil
 from pathlib import Path
 from src.errors import ShellError
 from src.paths import normalize_path, find_pathes
+from src.undo_logging import log_move, remove_error_from_trash
 
 def mv(text: str) -> None:
     '''
@@ -47,8 +48,13 @@ def mv(text: str) -> None:
         destination_path = destination_path / moving_path.name
     
     try:
+        # Сначала логируем, иначе потом необохдимая информация уже будет удалена
+        log_move(moving_path, destination_path)
         shutil.move(str(moving_path), str(destination_path))
     except PermissionError:
+        # Стираем из .trash лог об ошибочной операции
+        remove_error_from_trash()
         raise ShellError(f"mv: cannot move '{pathes[0]}': Permission denied")
     except Exception as e:
+        remove_error_from_trash()
         raise ShellError(f"mv: cannot move '{pathes[0]}': {e}")

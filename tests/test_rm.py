@@ -53,7 +53,7 @@ def test_rm_directory_without_r_option(mocker: MockerFixture):
 
 
 
-def test_rm_root_directory_protection(mocker: MockerFixture):
+def test_rm_root_directory(mocker: MockerFixture):
     root_mock = mocker.create_autospec(Path, instance=True, spec_set=True)
     root_mock.exists.return_value = True
     root_mock.is_dir.return_value = True

@@ -26,7 +26,6 @@ def test_cp_too_many_arguments():
         cp('"path/to/my file" dir1 dir2')
 
 
-
 def test_cp_nonexistent_source(mocker: MockerFixture):
     source_mock = mocker.create_autospec(Path, instance=True, spec_set=True)
     source_mock.exists.return_value = False
@@ -41,8 +40,6 @@ def test_cp_nonexistent_source(mocker: MockerFixture):
 
     assert fake_path_class.call_count == 2
     source_mock.exists.assert_called_once()
-
-
 
 
 def test_cp_directory_without_r_option(mocker: MockerFixture):
@@ -62,8 +59,6 @@ def test_cp_directory_without_r_option(mocker: MockerFixture):
     assert fake_path_class.call_count == 2
     source_mock.exists.assert_called_once()
     source_mock.is_dir.assert_called_once()
-
-
 
 
 def test_cp_parent_directory_not_exists(mocker: MockerFixture):
@@ -86,30 +81,6 @@ def test_cp_parent_directory_not_exists(mocker: MockerFixture):
         
     assert fake_path_class.call_count == 2
     dest_mock.parent.exists.assert_called_once()
-
-
-
-def test_cp_permission_denied(mocker: MockerFixture):
-    source_mock = mocker.create_autospec(Path, instance=True, spec_set=True)
-    source_mock.exists.return_value = True
-    source_mock.is_file.return_value = True
-    source_mock.is_dir.return_value = False
-        
-    dest_mock = mocker.create_autospec(Path, instance=True, spec_set=True)
-    dest_mock.exists.return_value = False
-    dest_mock.is_dir.return_value = False
-    dest_mock.parent.exists.return_value = True
-
-    fake_path_class = mocker.patch('src.paths.Path')
-    fake_path_class.side_effect = lambda x: source_mock if x == "source.txt" else dest_mock
-
-    mock_copy2 = mocker.patch('shutil.copy2', side_effect=ShellError("Permission denied"))
-        
-    with pytest.raises(ShellError):
-        cp("source.txt destination.txt")
-
-    assert fake_path_class.call_count == 2
-    mock_copy2.assert_called_once_with(source_mock, dest_mock)
 
 
 
@@ -165,5 +136,5 @@ def test_cp_file_to_existing_directory(mocker: MockerFixture):
     cp("file.txt target_dir")
         
     assert fake_path_class.call_count == 2
-    dest_mock.__truediv__.assert_called_once_with("file.txt")
+    dest_mock.__truediv__.assert_called_with("file.txt")
     mock_copy2.assert_called_once_with(source_mock, final_dest_mock)

@@ -1,0 +1,422 @@
+ls
+exit
+cd
+ls
+ls -l
+history
+exit
+ls
+ls -l
+ cd
+history
+cdcd ../Documents/exps
+cd ../Documents/exps
+cd
+cd cd ./Documents/exps
+cd ./Documents/exps
+ls
+rm -r "на удаление"
+undo
+exit
+ls
+history
+cd ../Documents/exps
+ls -l
+history
+rm deltion
+rm -r deltion
+undo
+exit
+cd ../Documents/exps
+rm -r deltion
+undo
+cp deltion
+cp deltion .
+cp deltion
+cp deltion .
+cp -r ddeltion .
+cp -r deltion .
+cp -r deltion C:\Users\User\Documents\exps
+cp -r dir1/also_empty .
+cp -r dir1
+cp -r dir1 .
+exit
+cd ../Documents/exps
+cp -r dir1 .
+exit
+cd ../Documents/exps
+exit
+cd ../Documents/exps
+cp -r dir1 ./dir50
+exit
+cd ../Documents/exps
+ cp -r dir1 .
+exit
+cd ../Documents/exps
+cp -r dir1 .
+exit
+cd ../Documents/exps
+cp -r pupu pupu2
+undo
+exit
+cd ../Documents/exps
+cp -r pupu pupu3
+undo
+undo
+exit
+cd ../Documents/exps
+cp -r pupu pupu3
+undo
+history
+exit
+exit
+cd ../Documents/exps
+rm bedni.txt
+exit
+cd ../Documents/exps
+ls
+cp bedni.txt bedni1
+cp bedni1 bedni2
+cp bedni2 bedni3
+cp bedni3 bedni4
+cp dedni4 bedni5
+cp bedni4 bedni5
+rm bedni5
+exit
+cd ../Documents/exps
+rm bedni4
+exit
+cd ../Documents/exps
+rm bedni4
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+ls
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+py -m src.main
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+exit
+cd ../Documents/exps
+cp bedni3 bedni4
+rm bedni4
+undo
+учше
+exit
+cd ../Documents/exps
+rm bedni4
+undo
+rm dir4
+rm -r dir4
+undo
+exit
+cd ../Documents/exps
+cp also_empty dir4
+cp -r also_empty dir4
+rm dir4
+rm -r dir4
+undo
+cp -r also_empty dir4
+undo
+exit
+cd ../Documents/exps
+cp also_empty dir6
+cp -r  also_empty dir6
+rm dir6
+rm -r dir6
+undo
+exit
+cd ../Documents/exps
+cp also_empty dir6
+cp -r  also_empty dir6
+rm -r dir6
+undo
+exit
+cd ../Documents/exps
+cp -r  also_empty dir6
+rm -r dir6
+cp -r  also_empty dir6
+cp -r  also_empty dir6
+exit
+cd ../Documents/exps
+cp -r  also_empty dir6
+cp -r  also_empty dir7
+rm -r dir6
+undo
+cp -r  also_empty dir6
+exit
+cd ../Documents/exps
+cp -r  also_empty dir6
+cp -r  also_empty dir7
+rm -r dir6
+undo
+cp -r  also_empty dir6
+cp -r  also_empty dir10
+учше
+exit
+cd ../Documents/exps
+cp -r  also_empty dir8
+rm -r dir8
+undo
+cp -r  also_empty dir9
+exit
+cd ../Documents/exps
+cp -r  also_empty dir11
+rm -r dir11
+undo
+cp -r  also_empty dir12
+undo
+exit
+cd ../Documents/exps
+cp -r  also_empty dir13
+rm -r dir13
+undo
+cp -r  also_empty dir14
+exit
+cd ../Documents/exps
+cp -r  also_empty dir15
+rm -r dir14
+undo
+exit
+cd ../Documents/exps
+cp -r  also_empty dir14
+rm -r dir14
+undo
+cp -r  also_empty dir16
+rm -r dir16
+undo
+rm -r dir16
+undo
+rm -r dir16
+undo
+rm -r dir16
+exit
+cd ../Documents/exps
+ls
+cp -r dir15 dir16
+rm -r dir16
+undo
+exit
+cd ../Documents/exps
+cp -r dir15 dir16
+rm -r dir16
+undo
+rm -r dir15
+cp -r dir16 dir15
+undo
+exit
+cd ../Documents/exps
+rm -r dir16
+undo
+cp -r dir16 dir17
+undo
+exit
+cd ../Documents/exps
+ls
+undo
+ls -r
+ls -l
+cp -r dir16 dir17
+undo
+undo
+rm -r dir17
+rm -r dir16
+undo
+rm -r dir16
+undo
+rm -r dir16
+undo
+rm -r dir16
+exit
+cd ../Documents/exps
+cp -r dir15 dir16
+cp dir16/somth/flag.txt dir16
+cp dir16/someth/flag.txt dir16
+cp dir16 dir17
+cp -r dir16 dir17
+rm -r dir16
+undo
+undo
+cp -r dir16 dir17
+mv dir15 dir17
+exit
+ cd ../Documents/exps
+ls
+mv dir17/dir15 .
+undo
+cp dir17 dir15
+cp -r dir17 dir15
+exit
+cd ../Documents/exps
+ls
+cp -r dir14 dir18
+rm -r dir18
+undo
+mv dir18 dir17
+undo
+exit
+ cd ../Documents/exps
+mv dir17 dir20
+undo
+mv dir17/flag.txt dir17/dir15
+undo
+exit
+cd ../Documents/exps
+cp dir50 dir49
+cp -r dir50 dir49
+exit
+ cd ../Documents/exps
+history
+history -7
+history 8
+exit
+cd ../Documents/exps
+cp -r dir14 dir141
+rm -r dir141
+history
+undo
+rm -r dir141
+exit
+ cd ../Documents/exps
+cp -r dir14 dir141
+cp -r dir14 dir142
+rm -r dir142
+undo
+rm -r dir142
+exit
+cd ../Documents/exps
+cp -r dir14 dir141
+rm -r dir142
+cp -r dir14 dir142
+rm -r dir142
+undo
+cp -r dir14 dir143
+exit
+ cd ../Documents/exps
+cp -r dir14 dir144
+rm -r dir144
+undo
+rm -r dir144
+exit
+cd ../Documents/exps
+rm -r dir143
+rm -r dir142
+undo
+rm -r dir142
+exit
+cd ../Documents/exps
+ls
+zip
+cp
+exit
+cd ../Documents/exps
+zip
+zip 1
+zip 1 2
+zip dir1 DIR1.zip
+rm DIR1
+rm -r DIR1
+undo
+rm DIR1.zip
+zip dir1 DIR1
+zip dir1 DIR1.zip
+unzip DIR1.zip
+zip pupu pipi.zip
+tar pupu tarpi.gz
+exit
+cd ../Documents/exps
+tar pupu tarpi.gz
+exit
+cd ../Documents/exps
+zip pupu check1.zip
+exit
+cd ../Documents/exps
+tar pupuin pupuin.zip
+tar pupuin pupuin.gz
+tar dir18 arch18.gz
+zip dir18 archi18.zip
+cd extract
+untar ~Documents\exps/check1.zip
+untar ~/Documents\exps/check1.zip
+unzip ~/Documents\exps/check1.zip
+untar ~Documents\exps/archi18.zip
+untar ~/Documents\exps/archi18.zip
+unzip ~/Documents\exps/archi18.zip
+unzip ~/Documents\exps/DIR1.zip
+zip ../dir16 ../arch16.zip
+unzip ../arch16.zip
+tar "Курсовая 11.docx" kurs.gz
+cd ..
+tar "Курсовая 11.docx" kurs.gz
+tar "Курсовая11.docx" kurs.gz
+zip "Курсовая11.docx" kurs.zip
+pytest
+exit
+cd ../Documents/exps
+zip "Курсовая11.docx" kurs.zip
+cd extract
+unzip ../kurs.zip
+history
+exit
+help
+cd ../Documents/exps
+zip bedni1 kurs.zip
+zip bedni2 kurs.zip
+exit
+ls
+cd ../Documents/exps
+ls -l
+exit

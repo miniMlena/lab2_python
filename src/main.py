@@ -1,10 +1,16 @@
 from pathlib import Path
-from src.execute import execute
 import logging
+from src.execute import execute
+from src.history import log_to_history
 
-logging.basicConfig(level=logging.INFO, filename="shell.log",
-                    filemode="w", format="%(asctime)s %(message)s",
-                    datefmt='[%Y-%m-%d %H:%M:%S]', encoding='utf-8')
+# Настраиваем логирование в shell.log
+logging.basicConfig(
+level=logging.INFO,
+filename="shell.log",
+filemode="w",
+format="%(asctime)s %(message)s",
+datefmt='[%Y-%m-%d %H:%M:%S]',
+encoding='utf-8')
 
 def main() -> None:
     """
@@ -19,14 +25,15 @@ def main() -> None:
     while True:
         request = input(f'{Path.cwd()}$ ')
 
+        if request.strip() == "":
+            continue
+
         logging.info(request)
+        log_to_history(request)
 
         if request.strip().lower() in ("выход", "exit"):
             print("Exiting shell...")
             break
-        
-        if request.strip() == "":
-            continue
 
         try:
             execute(request)
@@ -40,5 +47,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-#    py -m src.main         cd ../Documents/exps

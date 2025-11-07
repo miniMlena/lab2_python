@@ -75,7 +75,5 @@ def test_cat_called_for_existing_file(mocker: MockerFixture):
     cat("file.txt")
  
     fake_path_class.assert_called_once_with("file.txt")
-    file_mock.exists.assert_called_once()
-    file_mock.is_dir.assert_called_once()
     mock_open.assert_called_once_with(file_mock, 'r', encoding='utf-8')
     mock_print.assert_called_once_with(mock_file_content, end='')

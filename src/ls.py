@@ -73,14 +73,14 @@ def list_long_format(files: list) -> None:
             continue
     
     for file, stat_info in file_stats:
-        permissions = get_permissions(stat_info.st_mode)    # права доступа
+        permissions = get_permissions(stat_info.st_mode) # права доступа
         
-        size = stat_info.st_size    # размер
+        size = stat_info.st_size # размер
         
-        mtime = datetime.fromtimestamp(stat_info.st_mtime)    # время изменения
+        mtime = datetime.fromtimestamp(stat_info.st_mtime) # время изменения
         mtime_str = mtime.strftime('%b %d %H:%M')
         
-        if "'" in file.name or " " in file.name:    # имя
+        if "'" in file.name or " " in file.name: # имя
             name = '"' + file.name + '"'
         else:
             name = file.name
