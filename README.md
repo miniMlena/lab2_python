@@ -64,9 +64,13 @@
 ## Инструкция к использованию
 
 ### Установить репозиторий
-```pip install -e git+https://github.com/miniMlena/lab2_python.git#egg=lab2-python``` \
-```cd src```
+```pip install -e git+https://github.com/miniMlena/lab2_python.git#egg=labs``` \
+```cd src/labs```
 
+или:
+
+```git clone https://github.com/miniMlena/lab2_python```\
+```cd lab2_python```
 ### Запустить
 Сама программа:
 ```python -m src.main```
